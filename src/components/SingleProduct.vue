@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+let { product } = defineProps({
+  product: Object,
+})
+</script>
 
 <template>
   <article
@@ -10,12 +14,12 @@
     <div class="mt-4 flex items-start justify-between">
       <div>
         <h3 class="text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition">
-          Nordic Chair
+          {{ product.name }}
         </h3>
-        <p class="text-sm text-slate-600">Walnut • Breathable fabric</p>
+        <p class="text-sm text-slate-600">{{ product.detail }}</p>
       </div>
       <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700"
-        >$189</span
+        >${{ product.price }}</span
       >
     </div>
     <button

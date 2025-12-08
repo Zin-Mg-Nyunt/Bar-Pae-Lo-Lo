@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import SingleProduct from '@/components/SingleProduct.vue'
+import getProducts from '@/composable/getProducts'
 
 let showDropdown = ref(false)
+let { products, error, load } = getProducts()
+load()
 </script>
 
 <template>
@@ -121,7 +124,12 @@ let showDropdown = ref(false)
 
       <!-- product grid -->
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <SingleProduct v-for="product in [1, 2, 3, 4, 5, 6]" :key="product" />
+        <div v-for="product in products" :key="product" v-if="products.length">
+          <SingleProduct :product="product" />
+        </div>
+        <div v-else>
+          <p>No Products Found</p>
+        </div>
       </div>
     </section>
 

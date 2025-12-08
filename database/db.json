@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Honor X9c",
+      "detail": "6.7\" AMOLED, 8GB RAM, 256GB storage, 108MP triple camera",
+      "category": "Phone",
+      "price": 189.0
+    },
+    {
+      "id": 2,
+      "name": "Pixel 8",
+      "detail": "6.2\" OLED, Google Tensor G3, 128GB storage, AI-powered camera",
+      "category": "Phone",
+      "price": 699.0
+    },
+    {
+      "id": 3,
+      "name": "AirFlex Hoodie",
+      "detail": "Lightweight performance hoodie with moisture-wicking fabric",
+      "category": "Clothes",
+      "price": 68.0
+    },
+    {
+      "id": 4,
+      "name": "Lumen 55\" 4K TV",
+      "detail": "55-inch 4K UHD, HDR10+, 120Hz panel with built-in streaming",
+      "category": "TV",
+      "price": 549.0
+    },
+    {
+      "id": 5,
+      "name": "Breeze Mini Fan",
+      "detail": "Portable USB-C rechargeable desk fan with three speed modes",
+      "category": "Gadget",
+      "price": 29.0
+    },
+    {
+      "id": 6,
+      "name": "EcoWave Bottle",
+      "detail": "Insulated stainless steel bottle, keeps drinks cold 24h",
+      "category": "Accessories",
+      "price": 24.0
+    }
+  ]
+}
