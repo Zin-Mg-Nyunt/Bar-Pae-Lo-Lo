@@ -1,7 +1,10 @@
 <script setup>
+import { useRoute } from 'vue-router'
+
 let { product } = defineProps({
   product: Object,
 })
+let route = useRoute()
 </script>
 
 <template>
@@ -11,7 +14,15 @@ let { product } = defineProps({
     <div class="aspect-4/3 overflow-hidden rounded-xl bg-slate-100">
       <img :src="product.image" alt="" class="w-full h-full" />
     </div>
-    <router-link :to="{ name: 'detail', params: { id: product.id } }">
+    <router-link
+      :to="{
+        name: 'detail',
+        params: { id: product.id },
+        query: {
+          category: route.query.category,
+        },
+      }"
+    >
       <div class="mt-4 flex items-start justify-between">
         <div>
           <h3 class="text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition">

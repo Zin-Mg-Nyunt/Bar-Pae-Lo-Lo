@@ -1,19 +1,29 @@
 <script setup>
-import { ref } from 'vue'
-import SingleProduct from '@/components/SingleProduct.vue'
 import getProducts from '@/composable/getProducts'
+import SingleProduct from '@/components/SingleProduct.vue'
 import ProductDetail from '@/components/ProductDetail.vue'
+import FilterDropdown from '@/components/FilterDropdown.vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 let { id } = defineProps({
   id: {
-    type: Number,
+    type: [Number, String],
     default: null,
   },
 })
+let route = useRoute()
 
-let showDropdown = ref(false)
 let { products, error, load } = getProducts()
 load()
+let filterProducts = computed(() => {
+  if (route.query.category) {
+    return products.value.filter((p) => {
+      return p.category == route.query.category
+    })
+  }
+  return products.value
+})
 </script>
 
 <template>
@@ -83,47 +93,10 @@ load()
           <p class="text-sm text-slate-600">Browse curated picks and best-sellers.</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <div class="relative">
-            <button
-              class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              @click="showDropdown = !showDropdown"
-            >
-              <span>Filter by category</span>
-              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.084l3.71-3.853a.75.75 0 1 1 1.08 1.04l-4.243 4.405a.75.75 0 0 1-1.08 0L5.25 8.27a.75.75 0 0 1-.02-1.06Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-            <div
-              class="absolute right-0 mt-2 w-48 rounded-xl border border-slate-100 bg-white p-2 text-sm shadow-lg z-50"
-              :class="showDropdown ? 'inline-block' : 'hidden'"
-            >
-              <button
-                class="block w-full rounded-lg px-3 py-2 text-left text-slate-700 hover:bg-slate-50"
-              >
-                Furniture
-              </button>
-              <button
-                class="block w-full rounded-lg px-3 py-2 text-left text-slate-700 hover:bg-slate-50"
-              >
-                Lighting
-              </button>
-              <button
-                class="block w-full rounded-lg px-3 py-2 text-left text-slate-700 hover:bg-slate-50"
-              >
-                Decor
-              </button>
-              <button
-                class="block w-full rounded-lg px-3 py-2 text-left text-slate-700 hover:bg-slate-50"
-              >
-                Accessories
-              </button>
-            </div>
-          </div>
           <div class="flex items-center gap-2 text-sm text-slate-600">
+            <div v-if="products.length">
+              <FilterDropdown :products="products" />
+            </div>
             <span class="inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
             <span>120 items found</span>
           </div>
@@ -133,7 +106,7 @@ load()
       <!-- product grid -->
       <div class="relative">
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" v-if="products.length">
-          <SingleProduct v-for="product in products" :key="product" :product="product" />
+          <SingleProduct v-for="product in filterProducts" :key="product.id" :product="product" />
         </div>
         <div v-else>
           <p>No Products Found</p>

@@ -4,7 +4,7 @@ import getProduct from '@/composable/getProduct'
 
 const router = useRouter()
 let { id } = defineProps({
-  id: Number,
+  id: String,
 })
 let { product, error, load } = getProduct(id)
 load()
@@ -13,11 +13,11 @@ load()
 <template>
   <div
     class="w-full h-full bg-gray-400/50 flex justify-center items-center absolute top-0 left-0 rounded-2xl"
-    @click.self="router.push('/')"
+    @click.self="router.go(-1)"
   >
     <div
       v-if="product"
-      class="mx-auto max-w-2xl rounded-3xl border border-slate-100 bg-white p-6 shadow-xl"
+      class="mx-auto max-w-2xl rounded-3xl border border-slate-100 bg-white p-6 shadow-2xl"
     >
       <div class="grid gap-8 md:grid-cols-2">
         <div class="overflow-hidden rounded-2xl bg-slate-100 shadow-inner ring-1 ring-slate-200/80">

@@ -15,6 +15,11 @@ const router = createRouter({
       component: HomeView,
       props: true,
     },
+    {
+      path: '/products',
+      name: 'query',
+      component: HomeView,
+    },
   ],
 })
 
