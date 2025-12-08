@@ -8,7 +8,7 @@
         B
       </div>
       <span class="hidden md:inline-block text-lg font-semibold tracking-wide"
-        >Bar • Pe • Lo • Lo</span
+        >Bar • Pae • Lo • Lo</span
       >
     </div>
 

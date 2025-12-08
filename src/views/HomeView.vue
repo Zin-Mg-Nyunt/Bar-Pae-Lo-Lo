@@ -6,6 +6,7 @@ import FilterDropdown from '@/components/FilterDropdown.vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
+// accept props
 let { id } = defineProps({
   id: {
     type: [Number, String],
@@ -14,8 +15,11 @@ let { id } = defineProps({
 })
 let route = useRoute()
 
+// fetch data
 let { products, error, load } = getProducts()
 load()
+
+// create filterProducts
 let filterProducts = computed(() => {
   if (route.query.category) {
     return products.value.filter((p) => {

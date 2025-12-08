@@ -23,14 +23,14 @@ import Navbar from './components/Navbar.vue'
           >
             B
           </span>
-          Bar • Pe • Lo • Lo
+          Bar • Pae • Lo • Lo
         </div>
         <div class="flex flex-wrap items-center gap-4">
           <a href="#" class="hover:text-slate-900 transition">Privacy</a>
           <a href="#" class="hover:text-slate-900 transition">Terms</a>
           <a href="#" class="hover:text-slate-900 transition">Support</a>
         </div>
-        <p>© 2025 Bar • Pe • Lo • Lo. All rights reserved.</p>
+        <p>© 2025 Bar • Pae • Lo • Lo. All rights reserved.</p>
       </div>
     </footer>
   </div>
