@@ -2,6 +2,14 @@
 import { ref } from 'vue'
 import SingleProduct from '@/components/SingleProduct.vue'
 import getProducts from '@/composable/getProducts'
+import ProductDetail from '@/components/ProductDetail.vue'
+
+let { id } = defineProps({
+  id: {
+    type: Number,
+    default: null,
+  },
+})
 
 let showDropdown = ref(false)
 let { products, error, load } = getProducts()
@@ -123,36 +131,15 @@ load()
       </div>
 
       <!-- product grid -->
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div v-for="product in products" :key="product" v-if="products.length">
-          <SingleProduct :product="product" />
+      <div class="relative">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" v-if="products.length">
+          <SingleProduct v-for="product in products" :key="product" :product="product" />
         </div>
         <div v-else>
           <p>No Products Found</p>
         </div>
+        <ProductDetail v-if="id" :id="id" />
       </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="mt-8 rounded-2xl border border-slate-100 bg-white px-6 py-6 shadow-sm">
-      <div
-        class="flex flex-col gap-3 text-sm text-slate-600 md:flex-row md:items-center md:justify-between"
-      >
-        <div class="flex items-center gap-2 text-slate-900 font-semibold">
-          <span
-            class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-sky-400 to-indigo-500 text-sm font-black text-slate-900"
-          >
-            B
-          </span>
-          Bar • Pe • Lo • Lo
-        </div>
-        <div class="flex flex-wrap items-center gap-4">
-          <a href="#" class="hover:text-slate-900 transition">Privacy</a>
-          <a href="#" class="hover:text-slate-900 transition">Terms</a>
-          <a href="#" class="hover:text-slate-900 transition">Support</a>
-        </div>
-        <p>© 2025 Bar • Pe • Lo • Lo. All rights reserved.</p>
-      </div>
-    </footer>
   </div>
 </template>
