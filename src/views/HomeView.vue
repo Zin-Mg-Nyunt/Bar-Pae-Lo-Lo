@@ -27,7 +27,7 @@ let filterProducts = computed(() => {
   return products.value.filter((p) => {
     const matchSearch =
       !search || p.name.toLowerCase().includes(search) || p.detail.toLowerCase().includes(search)
-    const matchCategory = !category || p.category == category
+    const matchCategory = !category || p.category.slug == category
 
     return matchCategory && matchSearch
   })

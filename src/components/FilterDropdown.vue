@@ -14,20 +14,9 @@ products.forEach((p) => {
 
 // uniqueCategories
 let uniqueCategories = computed(() => {
-  return categories.value.filter((c, index, array) => {
-    return array.indexOf(c) === index
-  })
+  // [['phone',{...}],['phone',{...}],['clothes',{...}]] => {phone => {...},clothes => {...}} => {phone,clothes} => phone,clothes => [phone,clothes]
+  return [...new Map(categories.value.map((c) => [c.slug, c])).values()]
 })
-
-let filteredCategory = ref('Filter by category')
-let filterBy = (value) => {
-  if (value == 'All') {
-    filteredCategory.value = 'Filter by category'
-  } else {
-    filteredCategory.value = value
-  }
-  showDropdown.value = !showDropdown.value
-}
 </script>
 
 <template>
@@ -36,7 +25,7 @@ let filterBy = (value) => {
       class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
       @click="showDropdown = !showDropdown"
     >
-      <span>{{ filteredCategory }}</span>
+      <span>{{ route.query.category ? route.query.category : 'Filter by category' }}</span>
       <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path
           fill-rule="evenodd"
@@ -50,7 +39,11 @@ let filterBy = (value) => {
       :class="showDropdown ? 'inline-block' : 'hidden'"
     >
       <button class="block w-full rounded-lg px-3 py-2 text-left text-slate-700 hover:bg-slate-50">
-        <router-link :to="{ name: 'home' }" class="w-full inline-block" @click="filterBy('All')">
+        <router-link
+          :to="{ name: 'home' }"
+          class="w-full inline-block"
+          @click="showDropdown = !showDropdown"
+        >
           All
         </router-link>
       </button>
@@ -63,14 +56,14 @@ let filterBy = (value) => {
           :to="{
             name: 'query',
             query: {
-              category,
+              category: category.slug,
               search: route.query.search,
             },
           }"
           class="w-full inline-block"
-          @click="filterBy(category)"
+          @click="showDropdown = !showDropdown"
         >
-          {{ category }}
+          {{ category.name }}
         </router-link>
       </button>
     </div>
