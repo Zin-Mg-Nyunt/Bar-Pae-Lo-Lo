@@ -21,29 +21,16 @@ load()
 
 // create filterProducts
 let filterProducts = computed(() => {
-  if (route.query.search && route.query.category) {
-    return products.value.filter((p) => {
-      return (
-        (p.name.toLowerCase().includes(route.query.search.toLowerCase()) ||
-          p.detail.toLowerCase().includes(route.query.search.toLowerCase())) &&
-        p.category == route.query.category
-      )
-    })
-  }
-  if (route.query.category) {
-    return products.value.filter((p) => {
-      return p.category == route.query.category
-    })
-  }
-  if (route.query.search) {
-    return products.value.filter((p) => {
-      return (
-        p.name.toLowerCase().includes(route.query.search.toLowerCase()) ||
-        p.detail.toLowerCase().includes(route.query.search.toLowerCase())
-      )
-    })
-  }
-  return products.value
+  const search = route.query.search?.toLowerCase()
+  const category = route.query.category
+
+  return products.value.filter((p) => {
+    const matchSearch =
+      !search || p.name.toLowerCase().includes(search) || p.detail.toLowerCase().includes(search)
+    const matchCategory = !category || p.category == category
+
+    return matchCategory && matchSearch
+  })
 })
 </script>
 
