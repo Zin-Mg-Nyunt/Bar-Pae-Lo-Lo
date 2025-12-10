@@ -21,9 +21,26 @@ load()
 
 // create filterProducts
 let filterProducts = computed(() => {
+  if (route.query.search && route.query.category) {
+    return products.value.filter((p) => {
+      return (
+        (p.name.toLowerCase().includes(route.query.search.toLowerCase()) ||
+          p.detail.toLowerCase().includes(route.query.search.toLowerCase())) &&
+        p.category == route.query.category
+      )
+    })
+  }
   if (route.query.category) {
     return products.value.filter((p) => {
       return p.category == route.query.category
+    })
+  }
+  if (route.query.search) {
+    return products.value.filter((p) => {
+      return (
+        p.name.toLowerCase().includes(route.query.search.toLowerCase()) ||
+        p.detail.toLowerCase().includes(route.query.search.toLowerCase())
+      )
     })
   }
   return products.value
@@ -102,7 +119,7 @@ let filterProducts = computed(() => {
               <FilterDropdown :products="products" />
             </div>
             <span class="inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
-            <span>120 items found</span>
+            <span>{{ filterProducts.length }} items found</span>
           </div>
         </div>
       </div>

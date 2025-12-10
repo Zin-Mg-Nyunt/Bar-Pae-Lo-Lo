@@ -1,4 +1,19 @@
-<script setup></script>
+<script setup>
+import { useRoute, useRouter } from 'vue-router'
+
+let route = useRoute()
+let router = useRouter()
+
+const filterBySearch = (search) => {
+  router.push({
+    name: 'query',
+    query: {
+      search,
+      category: route.query.category,
+    },
+  })
+}
+</script>
 <template>
   <div class="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3">
     <div class="flex items-center gap-3">
@@ -25,6 +40,7 @@
           type="search"
           placeholder="Search..."
           class="w-full rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-slate-50 placeholder:text-slate-300/80 outline-none transition focus:border-sky-300 focus:ring-2 focus:ring-sky-300/60"
+          @input="filterBySearch($event.target.value)"
         />
         <!-- <div class="inline-block sm:hidden">
               <svg

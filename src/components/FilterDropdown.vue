@@ -1,10 +1,12 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
 let showDropdown = ref(false)
 let { products } = defineProps({
   products: Array,
 })
 let categories = ref([])
+let route = useRoute()
 
 products.forEach((p) => {
   categories.value.push(p.category)
@@ -62,6 +64,7 @@ let filterBy = (value) => {
             name: 'query',
             query: {
               category,
+              search: route.query.search,
             },
           }"
           class="w-full inline-block"
