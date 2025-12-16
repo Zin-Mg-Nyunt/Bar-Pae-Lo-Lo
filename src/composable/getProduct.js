@@ -1,3 +1,5 @@
+import { db } from '@/firebase/config'
+import { doc, getDoc } from 'firebase/firestore'
 import { ref } from 'vue'
 
 const getProduct = (id) => {
@@ -5,14 +7,10 @@ const getProduct = (id) => {
   let error = ref(null)
   const load = async () => {
     try {
-      let response = await fetch('http://localhost:3000/products/' + id)
-      if (response.status === 404) {
-        throw new Error('Product not found')
-      }
-      let data = await response.json()
-      product.value = data
+      const res = await getDoc(doc(db, 'products', id))
+      product.value = { id: res.id, ...res.data() }
     } catch (err) {
-      error.value = err.message
+      error.value = err.code
     }
   }
   return { product, error, load }
