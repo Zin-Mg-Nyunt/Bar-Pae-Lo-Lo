@@ -31,6 +31,9 @@ const filterBySearch = (search) => {
       <router-link :to="{ name: 'home' }" class="text-slate-200 transition hover:text-sky-300">
         Home
       </router-link>
+      <router-link :to="{ name: 'create' }" class="text-slate-200 transition hover:text-sky-300">
+        Create Products
+      </router-link>
     </nav>
 
     <div class="flex flex-1 justify-end">
@@ -38,6 +41,7 @@ const filterBySearch = (search) => {
         <span class="sr-only">Search</span>
         <input
           type="search"
+          :value="route.query.search ? route.query.search : ''"
           placeholder="Search..."
           class="w-full rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-slate-50 placeholder:text-slate-300/80 outline-none transition focus:border-sky-300 focus:ring-2 focus:ring-sky-300/60"
           @input="filterBySearch($event.target.value)"

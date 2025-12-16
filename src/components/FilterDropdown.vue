@@ -1,22 +1,14 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import getCategories from '@/composable/getCategories'
 let showDropdown = ref(false)
 let { products } = defineProps({
   products: Array,
 })
-let categories = ref([])
 let route = useRoute()
 
-products.forEach((p) => {
-  categories.value.push(p.category)
-})
-
-// uniqueCategories
-let uniqueCategories = computed(() => {
-  // [['phone',{...}],['phone',{...}],['clothes',{...}]] => {phone => {...},clothes => {...}} => {phone,clothes} => phone,clothes => [phone,clothes]
-  return [...new Map(categories.value.map((c) => [c.slug, c])).values()]
-})
+let { uniqueCategories } = getCategories(products)
 </script>
 
 <template>

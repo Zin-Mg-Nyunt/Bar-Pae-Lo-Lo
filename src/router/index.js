@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ProductCreate from '@/views/ProductCreate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,11 @@ const router = createRouter({
       path: '/products',
       name: 'query',
       component: HomeView,
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: ProductCreate,
     },
   ],
 })
