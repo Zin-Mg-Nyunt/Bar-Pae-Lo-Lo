@@ -45,7 +45,7 @@ load()
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm text-slate-500">Price</p>
-              <p class="text-3xl font-bold text-slate-900">${{ product.price.toFixed(2) }}</p>
+              <p class="text-2xl font-bold text-slate-900">${{ product.price.toFixed(2) }}</p>
             </div>
             <button
               class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-indigo-500 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"

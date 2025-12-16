@@ -3,36 +3,53 @@ import { reactive, ref } from 'vue'
 import getProducts from '@/composable/getProducts'
 import getCategories from '@/composable/getCategories'
 import { watch } from 'vue'
+import { useRouter } from 'vue-router'
 
-let { products, error, load } = getProducts()
-load()
-
-let categories = ref([])
-watch(products, (value) => {
-  let { uniqueCategories } = getCategories(value)
-  categories.value = uniqueCategories.value
-})
-
-// const categories = ['Beverage', 'Snack', 'Meal', 'Dessert', 'Other']
+let router = useRouter()
 const newProduct = reactive({
   name: '',
   detail: '',
-  category: '',
+  category: {},
   price: '',
   image: null,
 })
 
-const imageName = ref('No file chosen')
+// to fetch existing categories and show in select option
+let categories = ref([])
+let { products, error, load } = getProducts()
+load()
+watch(products, (value) => {
+  let { uniqueCategories } = getCategories(value)
+  categories.value = uniqueCategories.value
+})
+// to create new category
+let newCategory = ref('')
+let createCategoryInput = ref(false)
 
+// to handle image file
+const imageName = ref('No file chosen')
 const handleImage = (event) => {
+  // [file] it's array destructuring
   const [file] = event.target.files || []
-  newProduct.image = file || null
+  newProduct.image = file.name || null
   imageName.value = file ? file.name : 'No file chosen'
+  console.log(newProduct.image)
 }
 
-const handleSubmit = () => {
-  // Placeholder submit handler for now
-  console.log('Submitting product', { ...newProduct })
+const handleSubmit = async () => {
+  if (newCategory.value) {
+    newProduct.category.name =
+      newCategory.value.charAt(0).toUpperCase() + newCategory.value.slice(1)
+    newProduct.category.slug = newCategory.value.toLowerCase()
+  }
+  await fetch('http://localhost:3000/products', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newProduct),
+  })
+  router.push('/')
 }
 </script>
 
@@ -70,9 +87,18 @@ const handleSubmit = () => {
         </label>
 
         <label class="flex flex-col gap-2 text-slate-900 font-semibold">
-          <span class="text-sm">Category</span>
+          <div class="flex justify-between items-center">
+            <span class="text-sm">Category</span>
+            <span
+              class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-px hover:shadow-xl active:translate-y-px cursor-pointer"
+              @click="createCategoryInput = !createCategoryInput"
+            >
+              {{ createCategoryInput ? 'Close' : '+ Create Category' }}</span
+            >
+          </div>
           <select
-            v-model="newProduct.category"
+            v-if="!createCategoryInput"
+            v-model="newCategory"
             required
             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
           >
@@ -82,6 +108,14 @@ const handleSubmit = () => {
               {{ category.name }}
             </option>
           </select>
+          <input
+            v-if="createCategoryInput"
+            v-model="newCategory"
+            placeholder="Add category"
+            type="text"
+            required
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+          />
         </label>
 
         <label class="flex flex-col gap-2 text-slate-900 font-semibold">

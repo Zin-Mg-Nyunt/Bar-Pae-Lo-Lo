@@ -1,52 +1,81 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Honor X9c",
       "detail": "6.7\" AMOLED, 8GB RAM, 256GB storage, 108MP triple camera",
-      "category": { "name": "Phone", "slug": "phone" },
-      "price": 189.0,
+      "category": {
+        "name": "Phone",
+        "slug": "phone"
+      },
+      "price": 189,
       "image": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=900&q=80"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Pixel 8",
       "detail": "6.2\" OLED, Google Tensor G3, 128GB storage, AI-powered camera",
-      "category": { "name": "Phone", "slug": "phone" },
-      "price": 699.0,
+      "category": {
+        "name": "Phone",
+        "slug": "phone"
+      },
+      "price": 699,
       "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "AirFlex Hoodie",
       "detail": "Lightweight performance hoodie with moisture-wicking fabric",
-      "category": { "name": "Clothes", "slug": "clothes" },
-      "price": 68.0,
+      "category": {
+        "name": "Clothes",
+        "slug": "clothes"
+      },
+      "price": 68,
       "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Lumen 55\" 4K TV",
       "detail": "55-inch 4K UHD, HDR10+, 120Hz panel with built-in streaming",
-      "category": { "name": "Tv", "slug": "tv" },
-      "price": 549.0,
+      "category": {
+        "name": "Tv",
+        "slug": "tv"
+      },
+      "price": 549,
       "image": "https://i02.appmifile.com/600_operator_sg/23/04/2024/08d9270b659c4ffb25554c6309090174.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Breeze Mini Fan",
       "detail": "Portable USB-C rechargeable desk fan with three speed modes",
-      "category": { "name": "Gadget", "slug": "gadget" },
-      "price": 29.0,
+      "category": {
+        "name": "Gadget",
+        "slug": "gadget"
+      },
+      "price": 29,
       "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "EcoWave Bottle",
       "detail": "Insulated stainless steel bottle, keeps drinks cold 24h",
-      "category": { "name": "Accessories", "slug": "accessories" },
-      "price": 24.0,
+      "category": {
+        "name": "Accessories",
+        "slug": "accessories"
+      },
+      "price": 24,
       "image": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      "id": "0e25",
+      "name": "new ",
+      "detail": "new",
+      "category": {
+        "name": "Phone",
+        "slug": "phone"
+      },
+      "price": 10,
+      "image": "Believe In Yourself.jpg"
     }
   ]
 }
